@@ -1,105 +1,437 @@
-// easy-ai-lab full scaffold (Next.js + Tailwind + shadcn/ui + Lucide)
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy AI Lab - Mua Flow Automation Make.com Chất Lượng Cao</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+        }
+        /* Custom styles for icons if needed, or use inline SVG */
+        .icon-size {
+            width: 24px;
+            height: 24px;
+        }
+        .hamburger-menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #fff;
+                position: absolute;
+                top: 64px; /* Height of header */
+                left: 0;
+                z-index: 10;
+                border-top: 1px solid #e2e8f0;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-menu a {
+                padding: 1rem;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            .hamburger-menu {
+                display: block;
+            }
+            .main-nav-items {
+                display: none; /* Hide main nav items on mobile */
+            }
+            .header-icons {
+                margin-left: auto; /* Push icons to the right */
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
 
-import '@/styles/globals.css';
-import { useState } from 'react';
-import { LucideShoppingCart, LucideUser, LucideSearch } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import flows from '@/data/flows.json';
-import categories from '@/data/categories.json';
-
-// Header
-function Header({ cartCount }) {
-  return (
-    <header className="flex items-center justify-between p-4 border-b">
-      <div className="flex items-center gap-2">
-        <span className="text-xl font-bold text-red-500">Easy AI Lab</span>
-        <span className="text-xs bg-slate-200 px-2 py-0.5 rounded">Powered by Make.com</span>
-      </div>
-      <div className="hidden md:flex w-1/3">
-        <input className="w-full border rounded px-3 py-1" placeholder="Tìm kiếm flow automation..." />
-      </div>
-      <div className="flex items-center gap-4">
-        <LucideUser className="w-5 h-5" />
-        <div className="relative">
-          <LucideShoppingCart className="w-5 h-5" />
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">{cartCount}</span>
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 px-6 md:px-12 flex items-center justify-between relative z-20">
+        <div class="flex items-center space-x-4">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2 text-2xl font-bold text-gray-900">
+                <span>Easy AI Lab</span>
+                <span class="text-xs bg-purple-600 text-white px-2 py-1 rounded-full font-medium">Powered by Make.com</span>
+            </a>
         </div>
-      </div>
+
+        <!-- Search Bar (Desktop) -->
+        <div class="hidden md:flex flex-grow max-w-md mx-8">
+            <input type="text" placeholder="Tìm kiếm flow automation..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+
+        <!-- Main Menu (Desktop) -->
+        <nav class="hidden md:flex main-nav-items space-x-8 text-lg font-medium">
+            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Tất cả Flow</a>
+            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
+            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Hỗ trợ</a>
+        </nav>
+
+        <!-- Icons -->
+        <div class="flex items-center space-x-6 header-icons">
+            <!-- User Account Icon -->
+            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-size">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
+            <!-- Shopping Cart Icon -->
+            <a href="#" class="relative text-gray-700 hover:text-purple-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-size">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+            </a>
+            <!-- Hamburger Menu (Mobile) -->
+            <button id="hamburger" class="md:hidden text-gray-700 hover:text-purple-600 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-size">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="nav-menu">
+            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Tất cả Flow</a>
+            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
+            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Hỗ trợ</a>
+            <div class="p-4">
+                <input type="text" placeholder="Tìm kiếm flow automation..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+        </nav>
     </header>
-  );
-}
 
-// Footer
-function Footer() {
-  return (
-    <footer className="mt-16 p-6 border-t text-center">
-      <p>© 2024 Easy AI Lab. Made with ❤️</p>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white py-16 md:py-24 px-6 md:px-12 text-center rounded-b-3xl shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <!-- Rating -->
+            <div class="flex items-center justify-center mb-4">
+                <span class="text-yellow-400 text-2xl">★★★★★</span>
+                <span class="ml-2 text-lg font-medium">4.9/5 sao từ 500+ khách hàng</span>
+            </div>
+            <!-- Main Title -->
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">Mua Flow Automation Make.com Chất Lượng Cao</h1>
+            <!-- Description -->
+            <p class="text-lg md:text-xl mb-8 opacity-90">Hơn 200+ flow automation được thiết kế chuyên nghiệp, giúp bạn tự động hóa mọi quy trình kinh doanh. Giá chỉ từ <span class="font-bold">99,000₫/flow</span>.</p>
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#" class="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg">Xem tất cả Flow</a>
+                <a href="#" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-purple-700 transition-all duration-300 shadow-lg">Xem demo</a>
+            </div>
+            <!-- Company Info / Statistics -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-white opacity-90">
+                <div>
+                    <p class="text-4xl font-bold">200+</p>
+                    <p class="text-lg">Flow Automation</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold">5000+</p>
+                    <p class="text-lg">Khách hàng hài lòng</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold">99%</p>
+                    <p class="text-lg">Hài lòng</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Flows -->
+    <section class="py-16 md:py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Flow Nổi Bật</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Flow Card 1 -->
+                <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Flow+1" alt="Flow Automation 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="text-yellow-400">★★★★★</span>
+                            <span class="ml-2 text-sm text-gray-600">(45 Reviews)</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Tự động hóa Email Marketing</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Tự động gửi email chào mừng, email theo dõi và email khuyến mãi dựa trên hành vi khách hàng.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Gmail</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Mailchimp</span>
+                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">CRM</span>
+                        </div>
+                        <div class="flex items-baseline justify-between mb-4">
+                            <span class="text-gray-500 line-through text-lg">299,000₫</span>
+                            <span class="text-purple-600 font-bold text-2xl">199,000₫</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium">Chi tiết</button>
+                            <button class="flex-1 border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-50 transition-colors duration-200 font-medium">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flow Card 2 -->
+                <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Flow+2" alt="Flow Automation 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="text-yellow-400">★★★★★</span>
+                            <span class="ml-2 text-sm text-gray-600">(32 Reviews)</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Quản lý Lead tự động</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Tự động thu thập lead từ website, phân loại và gửi thông báo đến đội ngũ bán hàng.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Website</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">CRM</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Slack</span>
+                        </div>
+                        <div class="flex items-baseline justify-between mb-4">
+                            <span class="text-gray-500 line-through text-lg">349,000₫</span>
+                            <span class="text-purple-600 font-bold text-2xl">249,000₫</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium">Chi tiết</button>
+                            <button class="flex-1 border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-50 transition-colors duration-200 font-medium">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flow Card 3 -->
+                <div class="bg-gray-50 rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Flow+3" alt="Flow Automation 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="text-yellow-400">★★★★★</span>
+                            <span class="ml-2 text-sm text-gray-600">(50 Reviews)</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Đăng bài Social Media tự động</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Lên lịch và đăng bài viết lên các nền tảng mạng xã hội như Facebook, Instagram, Twitter.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Facebook</span>
+                            <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Instagram</span>
+                            <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Twitter</span>
+                        </div>
+                        <div class="flex items-baseline justify-between mb-4">
+                            <span class="text-gray-500 line-through text-lg">199,000₫</span>
+                            <span class="text-purple-600 font-bold text-2xl">99,000₫</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium">Chi tiết</button>
+                            <button class="flex-1 border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-50 transition-colors duration-200 font-medium">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flow Categories -->
+    <section class="py-16 md:py-24 px-6 md:px-12 bg-gray-100">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Danh mục Flow</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Category Card 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center">
+                    <div class="bg-purple-100 text-purple-600 p-3 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Email Marketing</h3>
+                    <p class="text-gray-600 text-sm mb-2">45 flows</p>
+                    <p class="text-gray-500 text-xs">Tự động hóa chiến dịch email của bạn.</p>
+                </div>
+                <!-- Category Card 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center">
+                    <div class="bg-blue-100 text-blue-600 p-3 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Sales & CRM</h3>
+                    <p class="text-gray-600 text-sm mb-2">38 flows</p>
+                    <p class="text-gray-500 text-xs">Quản lý khách hàng và quy trình bán hàng hiệu quả.</p>
+                </div>
+                <!-- Category Card 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center">
+                    <div class="bg-red-100 text-red-600 p-3 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Social Media</h3>
+                    <p class="text-gray-600 text-sm mb-2">32 flows</p>
+                    <p class="text-gray-500 text-xs">Tự động hóa việc đăng bài và tương tác trên mạng xã hội.</p>
+                </div>
+                <!-- Category Card 4 -->
+                <div class="bg-green-100 text-green-600 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center">
+                    <div class="bg-green-100 text-green-600 p-3 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">HR & Recruitment</h3>
+                    <p class="text-gray-600 text-sm mb-2">24 flows</p>
+                    <p class="text-gray-500 text-xs">Tối ưu hóa quy trình tuyển dụng và quản lý nhân sự.</p>
+                </div>
+                <!-- Category Card 5 -->
+                <div class="bg-yellow-100 text-yellow-600 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center">
+                    <div class="bg-yellow-100 text-yellow-600 p-3 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Document Processing</h3>
+                    <p class="text-gray-600 text-sm mb-2">29 flows</p>
+                    <p class="text-gray-500 text-xs">Tự động xử lý và quản lý tài liệu.</p>
+                </div>
+                <!-- Category Card 6 -->
+                <div class="bg-indigo-100 text-indigo-600 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center">
+                    <div class="bg-indigo-100 text-indigo-600 p-3 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">E-commerce</h3>
+                    <p class="text-gray-600 text-sm mb-2">35 flows</p>
+                    <p class="text-gray-500 text-xs">Tự động hóa các hoạt động kinh doanh trực tuyến.</p>
+                </div>
+                <!-- Category Card 7 -->
+                <div class="bg-pink-100 text-pink-600 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center">
+                    <div class="bg-pink-100 text-pink-600 p-3 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Scheduling</h3>
+                    <p class="text-gray-600 text-sm mb-2">18 flows</p>
+                    <p class="text-gray-500 text-xs">Quản lý lịch trình và cuộc hẹn tự động.</p>
+                </div>
+                <!-- Category Card 8 -->
+                <div class="bg-teal-100 text-teal-600 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center">
+                    <div class="bg-teal-100 text-teal-600 p-3 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15.2A10 10 0 0 1 5 6.8L2.3 9.5a1 1 0 0 0-.3 1.2L3 12l2.5 2.5a1 1 0 0 0 1.2-.3L9 12l3.7 3.7a1 1 0 0 0 1.2-.3L16 12l2.5 2.5a1 1 0 0 0 1.2-.3L21.2 15.2z"></path><path d="M12 2v20"></path><path d="M17 12H7"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Analytics & Reporting</h3>
+                    <p class="text-gray-600 text-sm mb-2">21 flows</p>
+                    <p class="text-gray-500 text-xs">Tự động thu thập và báo cáo dữ liệu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 md:py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Cách Sử Dụng Flow Automation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <!-- Step 1 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md flex flex-col items-center">
+                    <div class="bg-purple-600 text-white text-3xl font-bold rounded-full h-16 w-16 flex items-center justify-center mb-6 shadow-lg">1</div>
+                    <h3 class="text-xl font-semibold mb-4">Mua & Tải Flow</h3>
+                    <p class="text-gray-600">Chọn flow phù hợp với nhu cầu của bạn và tải về chỉ trong vài cú click.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md flex flex-col items-center">
+                    <div class="bg-purple-600 text-white text-3xl font-bold rounded-full h-16 w-16 flex items-center justify-center mb-6 shadow-lg">2</div>
+                    <h3 class="text-xl font-semibold mb-4">Import vào Make.com</h3>
+                    <p class="text-gray-600">Dễ dàng import file flow đã tải vào tài khoản Make.com của bạn.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md flex flex-col items-center">
+                    <div class="bg-purple-600 text-white text-3xl font-bold rounded-full h-16 w-16 flex items-center justify-center mb-6 shadow-lg">3</div>
+                    <h3 class="text-xl font-semibold mb-4">Cấu hình & Kích hoạt</h3>
+                    <p class="text-gray-600">Thực hiện cấu hình đơn giản theo hướng dẫn và kích hoạt flow.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md flex flex-col items-center">
+                    <div class="bg-purple-600 text-white text-3xl font-bold rounded-full h-16 w-16 flex items-center justify-center mb-6 shadow-lg">4</div>
+                    <h3 class="text-xl font-semibold mb-4">Tự động hoạt động</h3>
+                    <p class="text-gray-600">Flow của bạn sẽ tự động chạy, giúp bạn tiết kiệm thời gian và công sức.</p>
+                </div>
+            </div>
+
+            <!-- CTA Section for Support -->
+            <div class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white p-8 md:p-12 rounded-xl shadow-lg mt-16 text-center">
+                <h3 class="text-3xl font-bold mb-4">Cần hỗ trợ cài đặt?</h3>
+                <p class="text-lg mb-6 opacity-90">Chúng tôi cung cấp video hướng dẫn chi tiết và đội ngũ hỗ trợ sẵn sàng giúp đỡ bạn.</p>
+                <a href="#" class="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg">Xem video hướng dẫn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12 px-6 md:px-12 rounded-t-3xl">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Company Info -->
+            <div>
+                <a href="#" class="flex items-center space-x-2 text-2xl font-bold text-white mb-4">
+                    <span>Easy AI Lab</span>
+                    <span class="text-xs bg-purple-600 text-white px-2 py-1 rounded-full font-medium">Powered by Make.com</span>
+                </a>
+                <p class="text-sm mb-4">Easy AI Lab cung cấp các giải pháp tự động hóa Make.com chất lượng cao, giúp doanh nghiệp tối ưu hóa quy trình và tăng hiệu suất.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33A29 29 0 0 0 22.54 6.42z"></path><path d="M10 15.25l5-3.25-5-3.25v6.5z"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product Menu -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Sản phẩm</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">Tất cả Flow</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">Email Marketing</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">Sales & CRM</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">Social Media</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">E-commerce</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Liên hệ</h4>
+                <ul class="space-y-2 text-sm">
+                    <li>Email: <a href="mailto:contact@easyailab.com" class="hover:text-white transition-colors duration-200">contact@easyailab.com</a></li>
+                    <li>Điện thoại: <a href="tel:+84123456789" class="hover:text-white transition-colors duration-200">+84 123 456 789</a></li>
+                    <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM, Việt Nam</li>
+                </ul>
+            </div>
+
+            <!-- Newsletter (Optional, but good for engagement) -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Đăng ký nhận tin</h4>
+                <p class="text-sm mb-4">Nhận thông tin cập nhật về các flow mới và ưu đãi đặc biệt.</p>
+                <form class="flex">
+                    <input type="email" placeholder="Email của bạn" class="flex-grow px-4 py-2 rounded-l-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition-colors duration-200">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-500">
+            © 2024 Easy AI Lab. All rights reserved.
+        </div>
     </footer>
-  );
-}
 
-// Flow Card
-function FlowCard({ flow, onAdd }) {
-  return (
-    <Card className="p-4 hover:shadow-xl transition">
-      <img src={flow.image} alt={flow.title} className="w-full h-40 object-cover rounded" />
-      <div className="mt-2">
-        <div className="flex items-center gap-1 text-yellow-400">
-          {"★".repeat(Math.round(flow.rating))} ({flow.reviews})
-        </div>
-        <h3 className="font-semibold">{flow.title}</h3>
-        <p className="text-sm text-slate-600 line-clamp-2">{flow.description}</p>
-        <div className="flex items-center gap-2 mt-2">
-          {flow.tags.map(tag => <span key={tag} className="text-xs bg-slate-100 px-2 rounded">{tag}</span>)}
-        </div>
-        <div className="mt-2 flex justify-between items-center">
-          <div>
-            <span className="line-through text-slate-400 mr-2">{flow.priceOld.toLocaleString()}₫</span>
-            <span className="text-red-500 font-bold">{flow.priceNew.toLocaleString()}₫</span>
-          </div>
-          <Button onClick={() => onAdd(flow)}>Thêm vào giỏ</Button>
-        </div>
-      </div>
-    </Card>
-  );
-}
+    <script>
+        // JavaScript for mobile hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-// Homepage
-export default function HomePage() {
-  const [cart, setCart] = useState([]);
-  const addToCart = (flow) => setCart(prev => [...prev, flow]);
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
 
-  return (
-    <div>
-      <Header cartCount={cart.length} />
-      <section className="text-center py-12">
-        <p className="text-yellow-500 text-sm">⭐ 4.9/5 từ 500+ khách hàng</p>
-        <h1 className="text-4xl font-bold mt-2">Mua Flow Automation Make.com Chất Lượng Cao</h1>
-        <p className="mt-2 text-slate-600">Hơn 200+ flow automation, giá từ 99,000₫/flow</p>
-        <div className="flex gap-4 justify-center mt-4">
-          <Button className="bg-red-500 hover:bg-red-600">Xem tất cả Flow</Button>
-          <Button variant="outline">Xem demo</Button>
-        </div>
-      </section>
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
-        {flows.slice(0,3).map(flow => (
-          <FlowCard key={flow.id} flow={flow} onAdd={addToCart} />
-        ))}
-      </section>
-      <section className="p-6">
-        <h2 className="text-2xl font-bold mb-4">Khám phá theo danh mục</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {categories.map(cat => (
-            <Card key={cat.name} className="p-4 hover:shadow-lg transition">
-              <div className={`text-3xl ${cat.color}`}>{cat.icon}</div>
-              <h3 className="font-semibold">{cat.name} ({cat.count})</h3>
-              <p className="text-sm text-slate-600">{cat.description}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-      <Footer />
-    </div>
-  );
-}
+        // Close menu when clicking outside (optional, but good UX)
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.contains(event.target) && !hamburger.contains(event.target) && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
