@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thanh toán - Easy AI Lab</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -21,30 +19,24 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Header (Simple for checkout page) -->
     <header class="bg-white shadow-sm py-4 px-6 md:px-12 flex items-center justify-between relative z-20">
         <div class="flex items-center space-x-4">
-            <!-- Logo -->
             <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-gray-900">
                 <img src="https://res.cloudinary.com/dtz36zmtd/image/upload/v1751889248/Logo_EasiAI_rwinsf.jpg" alt="Easy AI Lab Logo" class="h-8 w-auto rounded-md">
                 <span>Easy AI Lab</span>
             </a>
         </div>
         <h1 class="text-xl md:text-2xl font-bold text-gray-900">Thanh toán đơn hàng</h1>
-        <div></div> <!-- Spacer for alignment -->
-    </header>
+        <div></div> </header>
 
-    <!-- Main Content - Checkout Form -->
     <main class="py-12 md:py-16 px-6 md:px-12">
         <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-lg">
             <div id="checkout-form-section">
                 <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Hoàn tất đơn hàng của bạn</h2>
 
-                <!-- Order Summary -->
                 <div class="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Tóm tắt đơn hàng</h3>
                     <div id="checkout-items-container" class="border-b border-gray-200 pb-4 mb-4">
-                        <!-- Cart items will be loaded here by JavaScript -->
                         <p class="text-gray-500 text-center">Giỏ hàng trống. Vui lòng quay lại trang sản phẩm.</p>
                     </div>
                     <div class="flex justify-between items-center">
@@ -53,7 +45,6 @@
                     </div>
                 </div>
 
-                <!-- Contact Information Form -->
                 <form id="checkout-form" class="space-y-6">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Thông tin liên hệ</h3>
                     <div>
@@ -75,7 +66,6 @@
                 </form>
             </div>
 
-            <!-- Order Confirmation / Payment Instructions Section (Initially Hidden) -->
             <div id="order-confirmation-section" class="hidden text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500 mx-auto mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -103,10 +93,8 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-12 px-6 md:px-12 rounded-t-3xl mt-12">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-            <!-- Company Info -->
             <div>
                 <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-white mb-4">
                     <img src="https://res.cloudinary.com/dtz36zmtd/image/upload/v1751889248/Logo_EasiAI_rwinsf.jpg" alt="Easy AI Lab Logo" class="h-8 w-auto rounded-md">
@@ -126,7 +114,6 @@
                 </div>
             </div>
 
-            <!-- Product Menu -->
             <div>
                 <h4 class="text-white font-semibold mb-4">Sản phẩm</h4>
                 <ul class="space-y-2 text-sm">
@@ -139,7 +126,6 @@
                 </ul>
             </div>
 
-            <!-- Contact Info -->
             <div>
                 <h4 class="text-white font-semibold mb-4">Liên hệ</h4>
                 <ul class="space-y-2 text-sm">
@@ -149,7 +135,6 @@
                 </ul>
             </div>
 
-            <!-- Newsletter (Optional, but good for engagement) -->
             <div>
                 <h4 class="text-white font-semibold mb-4">Đăng ký nhận tin</h4>
                 <p class="text-sm mb-4">Nhận thông tin cập nhật về các flow mới và ưu đãi đặc biệt.</p>
@@ -270,17 +255,8 @@
                     paymentStatus: 'Chờ thanh toán'
                 };
 
-                // IMPORTANT: Replace with your actual Make.com Webhook URL
-                // If this URL is incorrect or empty, the submission will fail.
-                const makeComWebhookUrl = 'https://hook.eu2.make.com/zbp42wx64bcs1tghnu5shtm4p65y2nkr'; // <<< THAY THẾ URL NÀY BẰNG WEBHOOK THỰC TẾ CỦA BẠN!
-
-                if (makeComWebhookUrl === 'https://hook.eu2.make.com/zbp42wx64bcs1tghnu5shtm4p65y2nkr' || !makeComWebhookUrl) {
-                    showMessage('Lỗi: Vui lòng thay thế "https://hook.eu2.make.com/zbp42wx64bcs1tghnu5shtm4p65y2nkr" bằng URL webhook Make.com thực tế của bạn trong mã code.');
-                    submitOrderBtn.disabled = false;
-                    submitOrderBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                    submitOrderBtn.textContent = 'Xác nhận đơn hàng';
-                    return; // Stop execution
-                }
+                // IMPORTANT: Make.com Webhook URL has been updated.
+                const makeComWebhookUrl = 'https://hook.eu2.make.com/zbp42wx64bcs1tghnu5shtm4p65y2nkr'; 
 
                 try {
                     const response = await fetch(makeComWebhookUrl, {
