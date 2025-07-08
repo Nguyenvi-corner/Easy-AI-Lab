@@ -61,20 +61,19 @@
             <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-gray-900">
                 <img src="https://res.cloudinary.com/dtz36zmtd/image/upload/v1751889248/Logo_EasiAI_rwinsf.jpg" alt="Easy AI Lab Logo" class="h-8 w-auto rounded-md">
                 <span>Easy AI Lab</span>
-                <span class="text-xs bg-purple-600 text-white px-2 py-1 rounded-full font-medium">Powered by Make.com</span>
             </a>
         </div>
 
         <!-- Search Bar (Desktop) -->
         <div class="hidden md:flex flex-grow max-w-md mx-8">
-            <input type="text" placeholder="Tìm kiếm chatbot hoặc tính năng..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <input type="text" placeholder="Tìm kiếm chatbot..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
         </div>
 
         <!-- Main Menu (Desktop) -->
         <nav class="hidden md:flex main-nav-items space-x-8 text-lg font-medium">
             <a href="allflow.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Tất cả Flow</a>
             <a href="allchatbot.html" class="text-purple-600 transition-colors duration-200">Tất cả Chatbot</a>
-            <a href="allcategory.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
+            <a href="allcategories.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
             <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Hỗ trợ</a>
         </nav>
 
@@ -110,40 +109,23 @@
         <nav id="mobile-menu" class="nav-menu">
             <a href="allflow.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Tất cả Flow</a>
             <a href="allchatbot.html" class="text-purple-600 transition-colors duration-200">Tất cả Chatbot</a>
-            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
+            <a href="allcategories.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
             <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Hỗ trợ</a>
             <div class="p-4">
-                <input type="text" placeholder="Tìm kiếm chatbot hoặc tính năng..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <input type="text" placeholder="Tìm kiếm chatbot..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
             </div>
         </nav>
     </header>
 
-    <!-- Main Content for All Chatbots -->
-    <main class="py-16 md:py-24 px-6 md:px-12 bg-white">
+    <!-- Main Content - Chatbots Section -->
+    <section id="chatbots-section" class="py-16 md:py-24 px-6 md:px-12 bg-gray-100">
         <div class="max-w-6xl mx-auto">
             <h1 class="text-3xl md:text-4xl font-bold text-center mb-12">Tất cả Chatbot AI</h1>
-
-            <!-- Filter/Sort Section (similar to allflow.html) -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
-                <div class="w-full md:w-1/3">
-                    <input type="text" id="chatbot-search" placeholder="Tìm kiếm theo tên chatbot..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                </div>
-                <div class="w-full md:w-1/3 md:text-right">
-                    <select id="chatbot-sort" class="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                        <option value="default">Sắp xếp theo</option>
-                        <option value="price-asc">Giá: Thấp đến Cao</option>
-                        <option value="price-desc">Giá: Cao đến Thấp</option>
-                        <option value="name-asc">Tên: A-Z</option>
-                        <option value="name-desc">Tên: Z-A</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="all-chatbots-container">
-                <!-- All Chatbots will be rendered here by JavaScript -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="chatbots-container">
+                <!-- Chatbots will be rendered here by JavaScript -->
             </div>
         </div>
-    </main>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-12 px-6 md:px-12 rounded-t-3xl">
@@ -153,7 +135,6 @@
                 <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-white mb-4">
                     <img src="https://res.cloudinary.com/dtz36zmtd/image/upload/v1751889248/Logo_EasiAI_rwinsf.jpg" alt="Easy AI Lab Logo" class="h-8 w-auto rounded-md">
                     <span>Easy AI Lab</span>
-                    <span class="text-xs bg-purple-600 text-white px-2 py-1 rounded-full font-medium">Powered by Make.com</span>
                 </a>
                 <p class="text-sm mb-4">Easy AI Lab là đội ngũ đam mê chuyển đổi số, tận dụng sức mạnh AI để tinh giản quy trình và nâng cao tương tác khách hàng. Chúng tôi xem đây như một phòng nghiên cứu, nơi ý tưởng automation và chatbot được biến thành giải pháp thực tế, giúp doanh nghiệp vận hành thông minh và hiệu quả hơn.</p>
                 <div class="flex space-x-4">
@@ -224,49 +205,49 @@
                 <span class="text-xl font-semibold text-gray-900">Tổng cộng:</span>
                 <span id="cart-total" class="text-2xl font-bold text-purple-600">0₫</span>
             </div>
-            <button class="w-full bg-purple-600 text-white py-3 rounded-lg mt-6 font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Tiến hành thanh toán</button>
+            <button id="proceed-to-checkout-btn" class="w-full bg-purple-600 text-white py-3 rounded-lg mt-6 font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Tiến hành thanh toán</button>
         </div>
     </div>
 
-    <!-- Chatbot Details Modal -->
-    <div id="chatbot-details-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-y-auto p-4">
+    <!-- Details Modal (for both Flows and Chatbots) -->
+    <div id="details-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-y-auto p-4">
         <div class="bg-white rounded-xl p-6 w-11/12 max-w-3xl shadow-xl transform scale-95 transition-transform duration-300 ease-out my-8">
             <div class="flex justify-between items-center mb-6">
-                <h2 id="chatbot-details-title" class="text-2xl md:text-3xl font-bold text-gray-900"></h2>
-                <button id="close-chatbot-details-modal" class="text-gray-500 hover:text-gray-700">
+                <h2 id="details-title" class="text-2xl md:text-3xl font-bold text-gray-900"></h2>
+                <button id="close-details-modal" class="text-gray-500 hover:text-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <img id="chatbot-details-image" src="" alt="Chatbot Image" class="w-full h-64 object-cover rounded-lg mb-4 shadow-md">
+                    <img id="details-image" src="" alt="Item Image" class="w-full h-64 object-cover rounded-lg mb-4 shadow-md">
                     <div class="flex items-center mb-4">
-                        <span id="chatbot-details-rating" class="text-yellow-400 text-xl"></span>
-                        <span id="chatbot-details-reviews" class="ml-2 text-sm text-gray-600"></span>
+                        <span id="details-rating" class="text-yellow-400 text-xl"></span>
+                        <span id="details-reviews" class="ml-2 text-sm text-gray-600"></span>
                     </div>
-                    <div id="chatbot-details-prices" class="flex items-baseline justify-between mb-4">
-                        <span id="chatbot-details-original-price" class="text-gray-500 line-through text-lg"></span>
-                        <span id="chatbot-details-current-price" class="text-purple-600 font-bold text-2xl"></span>
+                    <div id="details-prices" class="flex items-baseline justify-between mb-4">
+                        <span id="details-original-price" class="text-gray-500 line-through text-lg"></span>
+                        <span id="details-current-price" class="text-purple-600 font-bold text-2xl"></span>
                     </div>
-                    <button id="chatbot-details-add-to-cart-btn" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Thêm vào giỏ hàng</button>
+                    <button id="details-add-to-cart-btn" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Thêm vào giỏ hàng</button>
                 </div>
                 <div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Mô tả chi tiết</h3>
-                    <p id="chatbot-details-long-description" class="text-gray-700 text-sm mb-4"></p>
+                    <p id="details-long-description" class="text-gray-700 text-sm mb-4"></p>
 
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Các tính năng chính</h3>
-                    <ul id="chatbot-details-features" class="list-disc list-inside text-gray-700 text-sm mb-4 space-y-1">
+                    <ul id="details-features" class="list-disc list-inside text-gray-700 text-sm mb-4 space-y-1">
                         <!-- Features will be populated here -->
                     </ul>
 
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Tích hợp với</h3>
-                    <div id="chatbot-details-integrations" class="flex flex-wrap gap-2 mb-4">
+                    <div id="details-integrations" class="flex flex-wrap gap-2 mb-4">
                         <!-- Integrations will be populated here -->
                     </div>
 
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Hướng dẫn sử dụng</h3>
-                    <ol id="chatbot-details-how-to-use" class="list-decimal list-inside text-gray-700 text-sm space-y-1">
+                    <ol id="details-how-to-use" class="list-decimal list-inside text-gray-700 text-sm space-y-1">
                         <!-- How to use steps will be populated here -->
                     </ol>
                 </div>
@@ -299,6 +280,7 @@
         const closeCartModalBtn = document.getElementById('close-cart-modal');
         const cartItemsContainer = document.getElementById('cart-items-container');
         const cartTotalSpan = document.getElementById('cart-total');
+        const proceedToCheckoutBtn = document.getElementById('proceed-to-checkout-btn');
 
         // Function to update the cart count in the header
         function updateCartCount() {
@@ -318,7 +300,11 @@
 
             if (cartItems.length === 0) {
                 cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">Giỏ hàng trống.</p>';
+                proceedToCheckoutBtn.disabled = true; // Disable checkout button if cart is empty
+                proceedToCheckoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
             } else {
+                proceedToCheckoutBtn.disabled = false; // Enable checkout button
+                proceedToCheckoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
                 cartItems.forEach(item => {
                     const itemElement = document.createElement('div');
                     itemElement.classList.add('flex', 'items-center', 'justify-between', 'py-3', 'border-b', 'border-gray-100');
@@ -355,7 +341,6 @@
                 cartItems.push({ id, name, price, image, quantity: 1 });
             }
             updateCartCount();
-            // Optional: Show a small notification that item was added
             console.log(`Đã thêm "${name}" vào giỏ hàng.`);
         }
 
@@ -409,10 +394,21 @@
             }
         });
 
+        // Event listener for "Tiến hành thanh toán" button
+        proceedToCheckoutBtn.addEventListener('click', () => {
+            if (cartItems.length > 0) {
+                // Save cart items to localStorage before redirecting
+                localStorage.setItem('checkoutCartItems', JSON.stringify(cartItems));
+                window.location.href = 'checkout.html'; // Redirect to the checkout page
+            } else {
+                console.warn('Giỏ hàng trống, không thể tiến hành thanh toán.');
+            }
+        });
+
         // Initialize cart count on page load
         updateCartCount();
 
-        // --- Chatbot Data ---
+        // --- Data for Chatbots ---
         const chatbotsData = [
             {
                 id: 'chatbot1',
@@ -425,6 +421,7 @@
                 rating: 4.9,
                 reviews: 120,
                 tags: ['Dịch vụ khách hàng', 'Tăng doanh số', 'Tương tác 24/7', 'Đa kênh'],
+                category: 'Dịch vụ khách hàng',
                 features: [
                     'Tương tác khách hàng 24/7.',
                     'Cá nhân hóa trải nghiệm người dùng.',
@@ -455,6 +452,7 @@
                 rating: 4.8,
                 reviews: 75,
                 tags: ['Mỹ phẩm', 'Làm đẹp', 'Tư vấn sản phẩm', 'Cá nhân hóa'],
+                category: 'Mỹ phẩm & Làm đẹp',
                 features: [
                     'Tư vấn sản phẩm chăm sóc da và trang điểm.',
                     'Gợi ý sản phẩm phù hợp với loại da và nhu cầu.',
@@ -483,6 +481,7 @@
                 rating: 4.7,
                 reviews: 60,
                 tags: ['Phỏng vấn', 'Tuyển dụng', 'Luyện tập', 'Kỹ năng mềm'],
+                category: 'Tuyển dụng & Đào tạo',
                 features: [
                     'Mô phỏng phỏng vấn thực tế.',
                     'Đánh giá câu trả lời và đưa ra phản hồi.',
@@ -503,13 +502,14 @@
                 id: 'chatbot4',
                 name: 'Chef AI',
                 shortDescription: 'Trợ lý ẩm thực thông minh, gợi ý công thức, mẹo nấu ăn và lập kế hoạch bữa ăn hoàn hảo.',
-                longDescription: 'Chef AI là người bạn đồng hành lý tưởng trong nhà bếp, giúp bạn khám phá hàng ngàn công thức nấu ăn, học hỏi các mẹo vặt hữu ích và lên kế hoạch bữa ăn khoa học. Chatbot này có thể giải đáp mọi thắc mắc về ẩm thực, từ cách chế biến nguyên liệu đến cách kết hợp hương vị.',
+                longDescription: 'Chef AI là người bạn đồng hành lý tưởng trong nhà bếp, giúp bạn khám khám phá hàng ngàn công thức nấu ăn, học hỏi các mẹo vặt hữu ích và lên kế hoạch bữa ăn khoa học. Chatbot này có thể giải đáp mọi thắc mắc về ẩm thực, từ cách chế biến nguyên liệu đến cách kết hợp hương vị.',
                 image: 'https://placehold.co/400x200/FACC15/ffffff?text=Chef+AI',
                 price: 150000,
                 originalPrice: 200000,
                 rating: 4.9,
                 reviews: 90,
                 tags: ['Ẩm thực', 'Nấu ăn', 'Công thức', 'Kế hoạch bữa ăn'],
+                category: 'Ẩm thực & Giải trí',
                 features: [
                     'Gợi ý công thức nấu ăn đa dạng.',
                     'Hướng dẫn chi tiết từng bước.',
@@ -538,6 +538,7 @@
                 rating: 4.6,
                 reviews: 50,
                 tags: ['Email', 'Giao tiếp', 'Văn phòng', 'Hiệu suất'],
+                category: 'Văn phòng & Hiệu suất',
                 features: [
                     'Gợi ý cấu trúc và nội dung email.',
                     'Kiểm tra ngữ pháp và chính tả.',
@@ -565,6 +566,7 @@
                 rating: 4.7,
                 reviews: 80,
                 tags: ['Giáo dục', 'Học tập', 'Ôn thi', 'Kiến thức'],
+                category: 'Giáo dục',
                 features: [
                     'Giải đáp câu hỏi học thuật đa dạng.',
                     'Cung cấp tài liệu và nguồn tham khảo.',
@@ -584,43 +586,14 @@
             }
         ];
 
-        // Function to render all chatbots dynamically
-        function renderAllChatbots() {
-            const allChatbotsContainer = document.getElementById('all-chatbots-container');
-            allChatbotsContainer.innerHTML = ''; // Clear existing content
+        // Function to render chatbots dynamically
+        function renderChatbots() {
+            const chatbotsContainer = document.getElementById('chatbots-container');
+            chatbotsContainer.innerHTML = ''; // Clear existing content
 
-            let filteredChatbots = [...chatbotsData]; // Start with all chatbots
-
-            // Apply search filter
-            const searchTerm = document.getElementById('chatbot-search').value.toLowerCase();
-            if (searchTerm) {
-                filteredChatbots = filteredChatbots.filter(chatbot =>
-                    chatbot.name.toLowerCase().includes(searchTerm) ||
-                    chatbot.shortDescription.toLowerCase().includes(searchTerm) ||
-                    chatbot.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-                );
-            }
-
-            // Apply sort order
-            const sortOrder = document.getElementById('chatbot-sort').value;
-            if (sortOrder === 'price-asc') {
-                filteredChatbots.sort((a, b) => a.price - b.price);
-            } else if (sortOrder === 'price-desc') {
-                filteredChatbots.sort((a, b) => b.price - a.price);
-            } else if (sortOrder === 'name-asc') {
-                filteredChatbots.sort((a, b) => a.name.localeCompare(b.name));
-            } else if (sortOrder === 'name-desc') {
-                filteredChatbots.sort((a, b) => b.name.localeCompare(a.name));
-            }
-
-            if (filteredChatbots.length === 0) {
-                allChatbotsContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">Không tìm thấy chatbot nào phù hợp.</p>';
-                return;
-            }
-
-            filteredChatbots.forEach(chatbot => {
+            chatbotsData.forEach(chatbot => {
                 const chatbotCard = document.createElement('div');
-                chatbotCard.classList.add('bg-gray-50', 'rounded-xl', 'shadow-md', 'overflow-hidden', 'transform', 'hover:scale-105', 'transition-transform', 'duration-300');
+                chatbotCard.classList.add('bg-white', 'rounded-xl', 'shadow-md', 'overflow-hidden', 'transform', 'hover:scale-105', 'transition-transform', 'duration-300');
                 chatbotCard.innerHTML = `
                     <img src="${chatbot.image}" alt="${chatbot.name}" class="w-full h-48 object-cover">
                     <div class="p-6">
@@ -639,107 +612,108 @@
                         </div>
                         <div class="flex space-x-3">
                             <button class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium"
-                                onclick="showChatbotDetails('${chatbot.id}')">Chi tiết</button>
+                                onclick="showDetails('${chatbot.id}', 'chatbot')">Chi tiết</button>
                             <button class="flex-1 border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-50 transition-colors duration-200 font-medium"
                                 onclick="addToCart('${chatbot.id}', '${chatbot.name}', ${chatbot.price}, '${chatbot.image}')">Thêm vào giỏ</button>
                         </div>
                     </div>
                 `;
-                allChatbotsContainer.appendChild(chatbotCard);
+                chatbotsContainer.appendChild(chatbotCard);
             });
         }
 
-        // Event listeners for search and sort
-        document.getElementById('chatbot-search').addEventListener('input', renderAllChatbots);
-        document.getElementById('chatbot-sort').addEventListener('change', renderAllChatbots);
+        // --- Details Modal Logic (Unified for Flow and Chatbot) ---
+        const detailsModal = document.getElementById('details-modal');
+        const closeDetailsModalBtn = document.getElementById('close-details-modal');
+        const detailsTitle = document.getElementById('details-title');
+        const detailsImage = document.getElementById('details-image');
+        const detailsRating = document.getElementById('details-rating');
+        const detailsReviews = document.getElementById('details-reviews');
+        const detailsOriginalPrice = document.getElementById('details-original-price');
+        const detailsCurrentPrice = document.getElementById('details-current-price');
+        const detailsLongDescription = document.getElementById('details-long-description');
+        const detailsFeatures = document.getElementById('details-features');
+        const detailsIntegrations = document.getElementById('details-integrations');
+        const detailsHowToUse = document.getElementById('details-how-to-use');
+        const detailsAddToCartBtn = document.getElementById('details-add-to-cart-btn');
 
-        // Call renderAllChatbots on page load
-        document.addEventListener('DOMContentLoaded', renderAllChatbots);
+        function showDetails(itemId, itemType) {
+            let item;
+            if (itemType === 'chatbot') {
+                item = chatbotsData.find(c => c.id === itemId);
+            }
 
-
-        const chatbotDetailsModal = document.getElementById('chatbot-details-modal');
-        const closeChatbotDetailsModalBtn = document.getElementById('close-chatbot-details-modal');
-        const chatbotDetailsTitle = document.getElementById('chatbot-details-title');
-        const chatbotDetailsImage = document.getElementById('chatbot-details-image');
-        const chatbotDetailsRating = document.getElementById('chatbot-details-rating');
-        const chatbotDetailsReviews = document.getElementById('chatbot-details-reviews');
-        const chatbotDetailsOriginalPrice = document.getElementById('chatbot-details-original-price');
-        const chatbotDetailsCurrentPrice = document.getElementById('chatbot-details-current-price');
-        const chatbotDetailsLongDescription = document.getElementById('chatbot-details-long-description');
-        const chatbotDetailsFeatures = document.getElementById('chatbot-details-features');
-        const chatbotDetailsIntegrations = document.getElementById('chatbot-details-integrations');
-        const chatbotDetailsHowToUse = document.getElementById('chatbot-details-how-to-use');
-        const chatbotDetailsAddToCartBtn = document.getElementById('chatbot-details-add-to-cart-btn');
-
-        function showChatbotDetails(chatbotId) {
-            const chatbot = chatbotsData.find(f => f.id === chatbotId);
-
-            if (chatbot) {
-                chatbotDetailsTitle.textContent = chatbot.name;
-                chatbotDetailsImage.src = chatbot.image;
-                chatbotDetailsRating.textContent = '★'.repeat(Math.floor(chatbot.rating));
-                if (chatbot.rating % 1 !== 0) { // Add half star if applicable
-                    chatbotDetailsRating.textContent += '½';
+            if (item) {
+                detailsTitle.textContent = item.name;
+                detailsImage.src = item.image;
+                detailsRating.textContent = '★'.repeat(Math.floor(item.rating));
+                if (item.rating % 1 !== 0) { // Add half star if applicable
+                    detailsRating.textContent += '½';
                 }
-                chatbotDetailsReviews.textContent = `(${chatbot.reviews} Reviews)`;
-                chatbotDetailsOriginalPrice.textContent = chatbot.originalPrice ? formatCurrency(chatbot.originalPrice) : '';
-                chatbotDetailsCurrentPrice.textContent = formatCurrency(chatbot.price);
-                chatbotDetailsLongDescription.textContent = chatbot.longDescription;
+                detailsReviews.textContent = `(${item.reviews} Reviews)`;
+                detailsOriginalPrice.textContent = item.originalPrice ? formatCurrency(item.originalPrice) : '';
+                detailsCurrentPrice.textContent = formatCurrency(item.price);
+                detailsLongDescription.textContent = item.longDescription;
 
                 // Populate features
-                chatbotDetailsFeatures.innerHTML = '';
-                chatbot.features.forEach(feature => {
+                detailsFeatures.innerHTML = '';
+                item.features.forEach(feature => {
                     const li = document.createElement('li');
                     li.textContent = feature;
-                    chatbotDetailsFeatures.appendChild(li);
+                    detailsFeatures.appendChild(li);
                 });
 
                 // Populate integrations
-                chatbotDetailsIntegrations.innerHTML = '';
-                chatbot.integrations.forEach(integration => {
+                detailsIntegrations.innerHTML = '';
+                item.integrations.forEach(integration => {
                     const span = document.createElement('span');
                     span.classList.add('bg-gray-100', 'text-gray-800', 'text-sm', 'font-medium', 'px-2.5', 'py-0.5', 'rounded-full', 'flex', 'items-center', 'space-x-1');
                     span.innerHTML = `${integration.icon || ''}<span>${integration.name}</span>`;
-                    chatbotDetailsIntegrations.appendChild(span);
+                    detailsIntegrations.appendChild(span);
                 });
 
                 // Populate how to use
-                chatbotDetailsHowToUse.innerHTML = '';
-                chatbot.howToUse.forEach(step => {
+                detailsHowToUse.innerHTML = '';
+                item.howToUse.forEach(step => {
                     const li = document.createElement('li');
                     li.textContent = step;
-                    chatbotDetailsHowToUse.appendChild(li);
+                    detailsHowToUse.appendChild(li);
                 });
 
                 // Update "Add to Cart" button in modal
-                chatbotDetailsAddToCartBtn.onclick = () => {
-                    addToCart(chatbot.id, chatbot.name, chatbot.price, chatbot.image);
+                detailsAddToCartBtn.onclick = () => {
+                    addToCart(item.id, item.name, item.price, item.image);
                     // Optionally close modal after adding to cart
-                    closeChatbotDetailsModal();
+                    closeDetailsModal();
                 };
 
-                chatbotDetailsModal.style.display = 'flex'; // Show the modal
+                detailsModal.style.display = 'flex'; // Show the modal
                 setTimeout(() => {
-                    chatbotDetailsModal.querySelector('div').classList.remove('scale-95');
-                    chatbotDetailsModal.querySelector('div').classList.add('scale-100');
+                    detailsModal.querySelector('div').classList.remove('scale-95');
+                    detailsModal.querySelector('div').classList.add('scale-100');
                 }, 10); // Small delay for transition
             }
         }
 
-        function closeChatbotDetailsModal() {
-            chatbotDetailsModal.querySelector('div').classList.remove('scale-100');
-            chatbotDetailsModal.querySelector('div').classList.add('scale-95');
+        function closeDetailsModal() {
+            detailsModal.querySelector('div').classList.remove('scale-100');
+            detailsModal.querySelector('div').classList.add('scale-95');
             setTimeout(() => {
-                chatbotDetailsModal.style.display = 'none'; // Hide the modal
+                detailsModal.style.display = 'none'; // Hide the modal
             }, 300); // Match transition duration
         }
 
-        closeChatbotDetailsModalBtn.addEventListener('click', closeChatbotDetailsModal);
+        closeDetailsModalBtn.addEventListener('click', closeDetailsModal);
 
-        chatbotDetailsModal.addEventListener('click', (event) => {
-            if (event.target === chatbotDetailsModal) {
-                closeChatbotDetailsModal();
+        detailsModal.addEventListener('click', (event) => {
+            if (event.target === detailsModal) {
+                closeDetailsModal();
             }
+        });
+
+        // Call render functions on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderChatbots();
         });
     </script>
 </body>
