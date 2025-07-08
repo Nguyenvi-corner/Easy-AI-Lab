@@ -1212,7 +1212,8 @@
                 let chatHistory = [];
                 chatHistory.push({ role: "user", parts: [{ text: prompt }] });
                 const payload = { contents: chatHistory };
-                const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                // Use __api_key if available, otherwise fallback to empty string (Canvas will inject)
+                const apiKey = typeof __api_key !== 'undefined' ? __api_key : "";
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                 const response = await fetch(apiUrl, {
@@ -1246,6 +1247,5 @@
     </script>
     <!-- Include Marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- Removed the problematic script block that initialized 'const marked = new Marked();' -->
 </body>
 </html>
