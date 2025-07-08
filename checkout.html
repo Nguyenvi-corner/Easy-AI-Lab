@@ -69,7 +69,9 @@
                         <input type="tel" id="customer-phone" name="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                     </div>
 
-                    <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Xác nhận đơn hàng</button>
+                    <div id="form-message" class="text-center text-sm mt-4 hidden"></div>
+
+                    <button type="submit" id="submit-order-btn" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Xác nhận đơn hàng</button>
                 </form>
             </div>
 
@@ -186,6 +188,8 @@
             const checkoutFormSection = document.getElementById('checkout-form-section');
             const orderConfirmationSection = document.getElementById('order-confirmation-section');
             const displayOrderId = document.getElementById('display-order-id');
+            const submitOrderBtn = document.getElementById('submit-order-btn'); // Get reference to the submit button
+            const formMessage = document.getElementById('form-message'); // Get reference to the message div
 
             // Retrieve cart items from localStorage
             const cartItemsString = localStorage.getItem('checkoutCartItems');
@@ -200,8 +204,8 @@
             if (cartItems.length === 0) {
                 checkoutItemsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">Giỏ hàng trống. Vui lòng quay lại trang sản phẩm để thêm sản phẩm.</p>';
                 // Optionally disable the form submission if cart is empty
-                checkoutForm.querySelector('button[type="submit"]').disabled = true;
-                checkoutForm.querySelector('button[type="submit"]').classList.add('opacity-50', 'cursor-not-allowed');
+                submitOrderBtn.disabled = true;
+                submitOrderBtn.classList.add('opacity-50', 'cursor-not-allowed');
             } else {
                 checkoutItemsContainer.innerHTML = ''; // Clear default message
                 cartItems.forEach(item => {
@@ -223,9 +227,26 @@
             }
             checkoutTotalSpan.textContent = formatCurrency(totalAmount);
 
+            // Function to display messages
+            function showMessage(message, type = 'error') {
+                formMessage.textContent = message;
+                formMessage.classList.remove('hidden', 'text-red-500', 'text-green-500');
+                if (type === 'error') {
+                    formMessage.classList.add('text-red-500');
+                } else {
+                    formMessage.classList.add('text-green-500');
+                }
+            }
+
             // Handle form submission
             checkoutForm.addEventListener('submit', async (event) => {
                 event.preventDefault(); // Prevent default form submission
+
+                // Disable button and show loading state
+                submitOrderBtn.disabled = true;
+                submitOrderBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                submitOrderBtn.textContent = 'Đang xử lý...';
+                formMessage.classList.add('hidden'); // Hide previous messages
 
                 const customerName = document.getElementById('customer-name').value;
                 const customerEmail = document.getElementById('customer-email').value;
@@ -249,8 +270,17 @@
                     paymentStatus: 'Chờ thanh toán'
                 };
 
-                // Replace with your actual Make.com Webhook URL
-                const makeComWebhookUrl = 'YOUR_MAKE_COM_WEBHOOK_URL_HERE'; // <<< THAY THẾ URL NÀY
+                // IMPORTANT: Replace with your actual Make.com Webhook URL
+                // If this URL is incorrect or empty, the submission will fail.
+                const makeComWebhookUrl = 'YOUR_MAKE_COM_WEBHOOK_URL_HERE'; // <<< THAY THẾ URL NÀY BẰNG WEBHOOK THỰC TẾ CỦA BẠN!
+
+                if (makeComWebhookUrl === 'YOUR_MAKE_COM_WEBHOOK_URL_HERE' || !makeComWebhookUrl) {
+                    showMessage('Lỗi: Vui lòng thay thế "YOUR_MAKE_COM_WEBHOOK_URL_HERE" bằng URL webhook Make.com thực tế của bạn trong mã code.');
+                    submitOrderBtn.disabled = false;
+                    submitOrderBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    submitOrderBtn.textContent = 'Xác nhận đơn hàng';
+                    return; // Stop execution
+                }
 
                 try {
                     const response = await fetch(makeComWebhookUrl, {
@@ -264,6 +294,7 @@
                     if (response.ok) {
                         // Successfully sent to Make.com
                         console.log('Order data sent to Make.com successfully!');
+                        showMessage('Đơn hàng đã được gửi thành công!', 'success');
 
                         // Display confirmation and payment instructions
                         displayOrderId.textContent = orderId;
@@ -272,17 +303,22 @@
 
                         // Clear cart items from localStorage after successful order
                         localStorage.removeItem('checkoutCartItems');
-                        // Optionally reset cart count in header if we were on the same page
-                        // For this setup, user will likely navigate away, so not strictly necessary here.
                     } else {
                         console.error('Failed to send order data to Make.com:', response.status, response.statusText);
-                        // Show error message to user (e.g., using a custom modal or alert div)
-                        alert('Có lỗi xảy ra khi xử lý đơn hàng của bạn. Vui lòng thử lại sau.');
+                        const errorText = await response.text(); // Try to get more details from response
+                        console.error('Response body:', errorText);
+                        showMessage('Có lỗi xảy ra khi xử lý đơn hàng của bạn. Vui lòng thử lại sau. (Mã lỗi: ' + response.status + ')');
                     }
                 } catch (error) {
                     console.error('Error sending order data:', error);
-                    // Show error message to user
-                    alert('Có lỗi xảy ra khi gửi thông tin đơn hàng. Vui lòng kiểm tra kết nối mạng và thử lại.');
+                    showMessage('Có lỗi xảy ra khi gửi thông tin đơn hàng. Vui lòng kiểm tra kết nối mạng hoặc cấu hình webhook.');
+                } finally {
+                    // Re-enable button and reset text if not redirected
+                    if (orderConfirmationSection.classList.contains('hidden')) {
+                        submitOrderBtn.disabled = false;
+                        submitOrderBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                        submitOrderBtn.textContent = 'Xác nhận đơn hàng';
+                    }
                 }
             });
         });
