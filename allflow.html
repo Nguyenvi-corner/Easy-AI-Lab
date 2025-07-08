@@ -61,7 +61,6 @@
             <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-gray-900">
                 <img src="https://res.cloudinary.com/dtz36zmtd/image/upload/v1751889248/Logo_EasiAI_rwinsf.jpg" alt="Easy AI Lab Logo" class="h-8 w-auto rounded-md">
                 <span>Easy AI Lab</span>
-                <span class="text-xs bg-purple-600 text-white px-2 py-1 rounded-full font-medium">Powered by Make.com</span>
             </a>
         </div>
 
@@ -73,8 +72,8 @@
         <!-- Main Menu (Desktop) -->
         <nav class="hidden md:flex main-nav-items space-x-8 text-lg font-medium">
             <a href="allflow.html" class="text-purple-600 transition-colors duration-200">Tất cả Flow</a>
-            <a href="allchatbot.html" class="text-purple-600 transition-colors duration-200">Tất cả chatbot</a>
-            <a href="allcategory.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
+            <a href="allchatbot.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Tất cả Chatbot</a>
+            <a href="allcategories.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
             <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Hỗ trợ</a>
         </nav>
 
@@ -109,7 +108,8 @@
         <!-- Mobile Navigation Menu -->
         <nav id="mobile-menu" class="nav-menu">
             <a href="allflow.html" class="text-purple-600 transition-colors duration-200">Tất cả Flow</a>
-            <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
+            <a href="allchatbot.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Tất cả Chatbot</a>
+            <a href="allcategories.html" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Danh mục</a>
             <a href="#" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">Hỗ trợ</a>
             <div class="p-4">
                 <input type="text" placeholder="Tìm kiếm flow automation..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
@@ -117,32 +117,15 @@
         </nav>
     </header>
 
-    <!-- Main Content for All Flows -->
-    <main class="py-16 md:py-24 px-6 md:px-12 bg-white">
+    <!-- Main Content - Flows Section -->
+    <section id="flows-section" class="py-16 md:py-24 px-6 md:px-12 bg-gray-100">
         <div class="max-w-6xl mx-auto">
             <h1 class="text-3xl md:text-4xl font-bold text-center mb-12">Tất cả Flow Automation</h1>
-
-            <!-- Filter/Sort Section -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
-                <div class="w-full md:w-1/3">
-                    <input type="text" id="flow-search" placeholder="Tìm kiếm theo tên flow..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                </div>
-                <div class="w-full md:w-1/3 md:text-right">
-                    <select id="flow-sort" class="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                        <option value="default">Sắp xếp theo</option>
-                        <option value="price-asc">Giá: Thấp đến Cao</option>
-                        <option value="price-desc">Giá: Cao đến Thấp</option>
-                        <option value="name-asc">Tên: A-Z</option>
-                        <option value="name-desc">Tên: Z-A</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="all-flows-container">
-                <!-- All Flows will be rendered here by JavaScript -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="flows-container">
+                <!-- Flows will be rendered here by JavaScript -->
             </div>
         </div>
-    </main>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-12 px-6 md:px-12 rounded-t-3xl">
@@ -152,7 +135,6 @@
                 <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-white mb-4">
                     <img src="https://res.cloudinary.com/dtz36zmtd/image/upload/v1751889248/Logo_EasiAI_rwinsf.jpg" alt="Easy AI Lab Logo" class="h-8 w-auto rounded-md">
                     <span>Easy AI Lab</span>
-                    <span class="text-xs bg-purple-600 text-white px-2 py-1 rounded-full font-medium">Powered by Make.com</span>
                 </a>
                 <p class="text-sm mb-4">Easy AI Lab là đội ngũ đam mê chuyển đổi số, tận dụng sức mạnh AI để tinh giản quy trình và nâng cao tương tác khách hàng. Chúng tôi xem đây như một phòng nghiên cứu, nơi ý tưởng automation và chatbot được biến thành giải pháp thực tế, giúp doanh nghiệp vận hành thông minh và hiệu quả hơn.</p>
                 <div class="flex space-x-4">
@@ -172,7 +154,8 @@
             <div>
                 <h4 class="text-white font-semibold mb-4">Sản phẩm</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition-colors duration-200">Tất cả Flow</a></li>
+                    <li><a href="allflow.html" class="hover:text-white transition-colors duration-200">Tất cả Flow</a></li>
+                    <li><a href="allchatbot.html" class="hover:text-white transition-colors duration-200">Tất cả Chatbot</a></li>
                     <li><a href="#" class="hover:text-white transition-colors duration-200">Email Marketing</a></li>
                     <li><a href="#" class="hover:text-white transition-colors duration-200">Sales & CRM</a></li>
                     <li><a href="#" class="hover:text-white transition-colors duration-200">Social Media</a></li>
@@ -222,49 +205,49 @@
                 <span class="text-xl font-semibold text-gray-900">Tổng cộng:</span>
                 <span id="cart-total" class="text-2xl font-bold text-purple-600">0₫</span>
             </div>
-            <button class="w-full bg-purple-600 text-white py-3 rounded-lg mt-6 font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Tiến hành thanh toán</button>
+            <button id="proceed-to-checkout-btn" class="w-full bg-purple-600 text-white py-3 rounded-lg mt-6 font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Tiến hành thanh toán</button>
         </div>
     </div>
 
-    <!-- Flow Details Modal -->
-    <div id="flow-details-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-y-auto p-4">
+    <!-- Details Modal (for both Flows and Chatbots) -->
+    <div id="details-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-y-auto p-4">
         <div class="bg-white rounded-xl p-6 w-11/12 max-w-3xl shadow-xl transform scale-95 transition-transform duration-300 ease-out my-8">
             <div class="flex justify-between items-center mb-6">
-                <h2 id="flow-details-title" class="text-2xl md:text-3xl font-bold text-gray-900"></h2>
-                <button id="close-flow-details-modal" class="text-gray-500 hover:text-gray-700">
+                <h2 id="details-title" class="text-2xl md:text-3xl font-bold text-gray-900"></h2>
+                <button id="close-details-modal" class="text-gray-500 hover:text-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <img id="flow-details-image" src="" alt="Flow Image" class="w-full h-64 object-cover rounded-lg mb-4 shadow-md">
+                    <img id="details-image" src="" alt="Item Image" class="w-full h-64 object-cover rounded-lg mb-4 shadow-md">
                     <div class="flex items-center mb-4">
-                        <span id="flow-details-rating" class="text-yellow-400 text-xl"></span>
-                        <span id="flow-details-reviews" class="ml-2 text-sm text-gray-600"></span>
+                        <span id="details-rating" class="text-yellow-400 text-xl"></span>
+                        <span id="details-reviews" class="ml-2 text-sm text-gray-600"></span>
                     </div>
-                    <div id="flow-details-prices" class="flex items-baseline justify-between mb-4">
-                        <span id="flow-details-original-price" class="text-gray-500 line-through text-lg"></span>
-                        <span id="flow-details-current-price" class="text-purple-600 font-bold text-2xl"></span>
+                    <div id="details-prices" class="flex items-baseline justify-between mb-4">
+                        <span id="details-original-price" class="text-gray-500 line-through text-lg"></span>
+                        <span id="details-current-price" class="text-purple-600 font-bold text-2xl"></span>
                     </div>
-                    <button id="flow-details-add-to-cart-btn" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Thêm vào giỏ hàng</button>
+                    <button id="details-add-to-cart-btn" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Thêm vào giỏ hàng</button>
                 </div>
                 <div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Mô tả chi tiết</h3>
-                    <p id="flow-details-long-description" class="text-gray-700 text-sm mb-4"></p>
+                    <p id="details-long-description" class="text-gray-700 text-sm mb-4"></p>
 
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Các tính năng chính</h3>
-                    <ul id="flow-details-features" class="list-disc list-inside text-gray-700 text-sm mb-4 space-y-1">
+                    <ul id="details-features" class="list-disc list-inside text-gray-700 text-sm mb-4 space-y-1">
                         <!-- Features will be populated here -->
                     </ul>
 
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Tích hợp với</h3>
-                    <div id="flow-details-integrations" class="flex flex-wrap gap-2 mb-4">
+                    <div id="details-integrations" class="flex flex-wrap gap-2 mb-4">
                         <!-- Integrations will be populated here -->
                     </div>
 
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Hướng dẫn sử dụng</h3>
-                    <ol id="flow-details-how-to-use" class="list-decimal list-inside text-gray-700 text-sm space-y-1">
+                    <ol id="details-how-to-use" class="list-decimal list-inside text-gray-700 text-sm space-y-1">
                         <!-- How to use steps will be populated here -->
                     </ol>
                 </div>
@@ -297,6 +280,7 @@
         const closeCartModalBtn = document.getElementById('close-cart-modal');
         const cartItemsContainer = document.getElementById('cart-items-container');
         const cartTotalSpan = document.getElementById('cart-total');
+        const proceedToCheckoutBtn = document.getElementById('proceed-to-checkout-btn');
 
         // Function to update the cart count in the header
         function updateCartCount() {
@@ -316,7 +300,11 @@
 
             if (cartItems.length === 0) {
                 cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">Giỏ hàng trống.</p>';
+                proceedToCheckoutBtn.disabled = true; // Disable checkout button if cart is empty
+                proceedToCheckoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
             } else {
+                proceedToCheckoutBtn.disabled = false; // Enable checkout button
+                proceedToCheckoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
                 cartItems.forEach(item => {
                     const itemElement = document.createElement('div');
                     itemElement.classList.add('flex', 'items-center', 'justify-between', 'py-3', 'border-b', 'border-gray-100');
@@ -353,7 +341,6 @@
                 cartItems.push({ id, name, price, image, quantity: 1 });
             }
             updateCartCount();
-            // Optional: Show a small notification that item was added
             console.log(`Đã thêm "${name}" vào giỏ hàng.`);
         }
 
@@ -407,10 +394,21 @@
             }
         });
 
+        // Event listener for "Tiến hành thanh toán" button
+        proceedToCheckoutBtn.addEventListener('click', () => {
+            if (cartItems.length > 0) {
+                // Save cart items to localStorage before redirecting
+                localStorage.setItem('checkoutCartItems', JSON.stringify(cartItems));
+                window.location.href = 'checkout.html'; // Redirect to the checkout page
+            } else {
+                console.warn('Giỏ hàng trống, không thể tiến hành thanh toán.');
+            }
+        });
+
         // Initialize cart count on page load
         updateCartCount();
 
-        // --- Flow Details Logic ---
+        // --- Data for Flows ---
         const flowsData = [
             {
                 id: 'flow1',
@@ -423,6 +421,7 @@
                 rating: 4.9,
                 reviews: 45,
                 tags: ['Gmail', 'Mailchimp', 'CRM', 'Email Automation'],
+                category: 'Email Marketing',
                 features: [
                     'Tự động gửi email dựa trên sự kiện (đăng ký, mua hàng, bỏ giỏ hàng).',
                     'Phân khúc khách hàng tự động.',
@@ -454,6 +453,7 @@
                 rating: 4.8,
                 reviews: 32,
                 tags: ['Website', 'CRM', 'Slack', 'Lead Management'],
+                category: 'Sales & CRM',
                 features: [
                     'Tự động thu thập lead từ nhiều nguồn.',
                     'Phân loại lead dựa trên tiêu chí tùy chỉnh.',
@@ -485,6 +485,7 @@
                 rating: 4.7,
                 reviews: 50,
                 tags: ['Facebook', 'Instagram', 'Twitter', 'Social Media Automation'],
+                category: 'Social Media',
                 features: [
                     'Lên lịch đăng bài tự động.',
                     'Hỗ trợ đa nền tảng mạng xã hội.',
@@ -516,6 +517,7 @@
                 rating: 4.8,
                 reviews: 40,
                 tags: ['E-commerce', 'Content Automation', 'Social Media', 'Google Sheets'],
+                category: 'E-commerce',
                 features: [
                     'Nhập sản phẩm từ Google Sheets.',
                     'Tự động tạo nội dung quảng cáo với nhiều công thức.',
@@ -546,6 +548,7 @@
                 rating: 4.7,
                 reviews: 38,
                 tags: ['Content Creation', 'Social Media', 'Blogging', 'Google Sheets'],
+                category: 'Content Creation',
                 features: [
                     'Tự động tạo bài viết dựa trên Topic và mô tả.',
                     'Cho phép kiểm duyệt và chỉnh sửa trước khi đăng.',
@@ -576,6 +579,7 @@
                 rating: 4.9,
                 reviews: 55,
                 tags: ['Email Automation', 'Customer Service', 'Sales Support'],
+                category: 'Email Marketing',
                 features: [
                     'Tự động đọc email từ thư mục được chỉ định.',
                     'Cá nhân hóa nội dung phản hồi.',
@@ -605,6 +609,7 @@
                 rating: 4.7,
                 reviews: 28,
                 tags: ['CRM', 'Email Automation', 'Customer Segmentation', 'Sales'],
+                category: 'Sales & CRM',
                 features: [
                     'Tự động thu thập và phân tích thông tin khách hàng.',
                     'Tạo nội dung email cá nhân hóa theo ngữ cảnh.',
@@ -612,7 +617,7 @@
                     'Tích hợp liền mạch với các hệ thống CRM.'
                 ],
                 integrations: [
-                    { name: 'Google Sheets', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0  0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>' },
+                    { name: 'Google Sheets', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>' },
                     { name: 'CRM', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>' },
                     { name: 'Gmail', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' }
                 ],
@@ -635,6 +640,7 @@
                 rating: 4.6,
                 reviews: 35,
                 tags: ['Email Marketing', 'Mass Email', 'Personalization', 'Google Sheets'],
+                category: 'Email Marketing',
                 features: [
                     'Gửi email hàng loạt tự động.',
                     'Cá nhân hóa nội dung email theo tên người nhận.',
@@ -656,43 +662,14 @@
             }
         ];
 
-        // Function to render all flows dynamically
-        function renderAllFlows() {
-            const allFlowsContainer = document.getElementById('all-flows-container');
-            allFlowsContainer.innerHTML = ''; // Clear existing content
+        // Function to render flows dynamically
+        function renderFlows() {
+            const flowsContainer = document.getElementById('flows-container');
+            flowsContainer.innerHTML = ''; // Clear existing content
 
-            let filteredFlows = [...flowsData]; // Start with all flows
-
-            // Apply search filter
-            const searchTerm = document.getElementById('flow-search').value.toLowerCase();
-            if (searchTerm) {
-                filteredFlows = filteredFlows.filter(flow =>
-                    flow.name.toLowerCase().includes(searchTerm) ||
-                    flow.shortDescription.toLowerCase().includes(searchTerm) ||
-                    flow.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-                );
-            }
-
-            // Apply sort order
-            const sortOrder = document.getElementById('flow-sort').value;
-            if (sortOrder === 'price-asc') {
-                filteredFlows.sort((a, b) => a.price - b.price);
-            } else if (sortOrder === 'price-desc') {
-                filteredFlows.sort((a, b) => b.price - a.price);
-            } else if (sortOrder === 'name-asc') {
-                filteredFlows.sort((a, b) => a.name.localeCompare(b.name));
-            } else if (sortOrder === 'name-desc') {
-                filteredFlows.sort((a, b) => b.name.localeCompare(a.name));
-            }
-
-            if (filteredFlows.length === 0) {
-                allFlowsContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">Không tìm thấy flow nào phù hợp.</p>';
-                return;
-            }
-
-            filteredFlows.forEach(flow => {
+            flowsData.forEach(flow => {
                 const flowCard = document.createElement('div');
-                flowCard.classList.add('bg-gray-50', 'rounded-xl', 'shadow-md', 'overflow-hidden', 'transform', 'hover:scale-105', 'transition-transform', 'duration-300');
+                flowCard.classList.add('bg-white', 'rounded-xl', 'shadow-md', 'overflow-hidden', 'transform', 'hover:scale-105', 'transition-transform', 'duration-300');
                 flowCard.innerHTML = `
                     <img src="${flow.image}" alt="${flow.name}" class="w-full h-48 object-cover">
                     <div class="p-6">
@@ -711,107 +688,108 @@
                         </div>
                         <div class="flex space-x-3">
                             <button class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium"
-                                onclick="showFlowDetails('${flow.id}')">Chi tiết</button>
+                                onclick="showDetails('${flow.id}', 'flow')">Chi tiết</button>
                             <button class="flex-1 border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-50 transition-colors duration-200 font-medium"
                                 onclick="addToCart('${flow.id}', '${flow.name}', ${flow.price}, '${flow.image}')">Thêm vào giỏ</button>
                         </div>
                     </div>
                 `;
-                allFlowsContainer.appendChild(flowCard);
+                flowsContainer.appendChild(flowCard);
             });
         }
 
-        // Event listeners for search and sort
-        document.getElementById('flow-search').addEventListener('input', renderAllFlows);
-        document.getElementById('flow-sort').addEventListener('change', renderAllFlows);
+        // --- Details Modal Logic (Unified for Flow and Chatbot) ---
+        const detailsModal = document.getElementById('details-modal');
+        const closeDetailsModalBtn = document.getElementById('close-details-modal');
+        const detailsTitle = document.getElementById('details-title');
+        const detailsImage = document.getElementById('details-image');
+        const detailsRating = document.getElementById('details-rating');
+        const detailsReviews = document.getElementById('details-reviews');
+        const detailsOriginalPrice = document.getElementById('details-original-price');
+        const detailsCurrentPrice = document.getElementById('details-current-price');
+        const detailsLongDescription = document.getElementById('details-long-description');
+        const detailsFeatures = document.getElementById('details-features');
+        const detailsIntegrations = document.getElementById('details-integrations');
+        const detailsHowToUse = document.getElementById('details-how-to-use');
+        const detailsAddToCartBtn = document.getElementById('details-add-to-cart-btn');
 
-        // Call renderAllFlows on page load
-        document.addEventListener('DOMContentLoaded', renderAllFlows);
+        function showDetails(itemId, itemType) {
+            let item;
+            if (itemType === 'flow') {
+                item = flowsData.find(f => f.id === itemId);
+            }
 
-
-        const flowDetailsModal = document.getElementById('flow-details-modal');
-        const closeFlowDetailsModalBtn = document.getElementById('close-flow-details-modal');
-        const flowDetailsTitle = document.getElementById('flow-details-title');
-        const flowDetailsImage = document.getElementById('flow-details-image');
-        const flowDetailsRating = document.getElementById('flow-details-rating');
-        const flowDetailsReviews = document.getElementById('flow-details-reviews');
-        const flowDetailsOriginalPrice = document.getElementById('flow-details-original-price');
-        const flowDetailsCurrentPrice = document.getElementById('flow-details-current-price');
-        const flowDetailsLongDescription = document.getElementById('flow-details-long-description');
-        const flowDetailsFeatures = document.getElementById('flow-details-features');
-        const flowDetailsIntegrations = document.getElementById('flow-details-integrations');
-        const flowDetailsHowToUse = document.getElementById('flow-details-how-to-use');
-        const flowDetailsAddToCartBtn = document.getElementById('flow-details-add-to-cart-btn');
-
-        function showFlowDetails(flowId) {
-            const flow = flowsData.find(f => f.id === flowId);
-
-            if (flow) {
-                flowDetailsTitle.textContent = flow.name;
-                flowDetailsImage.src = flow.image;
-                flowDetailsRating.textContent = '★'.repeat(Math.floor(flow.rating));
-                if (flow.rating % 1 !== 0) { // Add half star if applicable
-                    flowDetailsRating.textContent += '½';
+            if (item) {
+                detailsTitle.textContent = item.name;
+                detailsImage.src = item.image;
+                detailsRating.textContent = '★'.repeat(Math.floor(item.rating));
+                if (item.rating % 1 !== 0) { // Add half star if applicable
+                    detailsRating.textContent += '½';
                 }
-                flowDetailsReviews.textContent = `(${flow.reviews} Reviews)`;
-                flowDetailsOriginalPrice.textContent = flow.originalPrice ? formatCurrency(flow.originalPrice) : '';
-                flowDetailsCurrentPrice.textContent = formatCurrency(flow.price);
-                flowDetailsLongDescription.textContent = flow.longDescription;
+                detailsReviews.textContent = `(${item.reviews} Reviews)`;
+                detailsOriginalPrice.textContent = item.originalPrice ? formatCurrency(item.originalPrice) : '';
+                detailsCurrentPrice.textContent = formatCurrency(item.price);
+                detailsLongDescription.textContent = item.longDescription;
 
                 // Populate features
-                flowDetailsFeatures.innerHTML = '';
-                flow.features.forEach(feature => {
+                detailsFeatures.innerHTML = '';
+                item.features.forEach(feature => {
                     const li = document.createElement('li');
                     li.textContent = feature;
-                    flowDetailsFeatures.appendChild(li);
+                    detailsFeatures.appendChild(li);
                 });
 
                 // Populate integrations
-                flowDetailsIntegrations.innerHTML = '';
-                flow.integrations.forEach(integration => {
+                detailsIntegrations.innerHTML = '';
+                item.integrations.forEach(integration => {
                     const span = document.createElement('span');
                     span.classList.add('bg-gray-100', 'text-gray-800', 'text-sm', 'font-medium', 'px-2.5', 'py-0.5', 'rounded-full', 'flex', 'items-center', 'space-x-1');
                     span.innerHTML = `${integration.icon || ''}<span>${integration.name}</span>`;
-                    flowDetailsIntegrations.appendChild(span);
+                    detailsIntegrations.appendChild(span);
                 });
 
                 // Populate how to use
-                flowDetailsHowToUse.innerHTML = '';
-                flow.howToUse.forEach(step => {
+                detailsHowToUse.innerHTML = '';
+                item.howToUse.forEach(step => {
                     const li = document.createElement('li');
                     li.textContent = step;
-                    flowDetailsHowToUse.appendChild(li);
+                    detailsHowToUse.appendChild(li);
                 });
 
                 // Update "Add to Cart" button in modal
-                flowDetailsAddToCartBtn.onclick = () => {
-                    addToCart(flow.id, flow.name, flow.price, flow.image);
+                detailsAddToCartBtn.onclick = () => {
+                    addToCart(item.id, item.name, item.price, item.image);
                     // Optionally close modal after adding to cart
-                    closeFlowDetailsModal();
+                    closeDetailsModal();
                 };
 
-                flowDetailsModal.style.display = 'flex'; // Show the modal
+                detailsModal.style.display = 'flex'; // Show the modal
                 setTimeout(() => {
-                    flowDetailsModal.querySelector('div').classList.remove('scale-95');
-                    flowDetailsModal.querySelector('div').classList.add('scale-100');
+                    detailsModal.querySelector('div').classList.remove('scale-95');
+                    detailsModal.querySelector('div').classList.add('scale-100');
                 }, 10); // Small delay for transition
             }
         }
 
-        function closeFlowDetailsModal() {
-            flowDetailsModal.querySelector('div').classList.remove('scale-100');
-            flowDetailsModal.querySelector('div').classList.add('scale-95');
+        function closeDetailsModal() {
+            detailsModal.querySelector('div').classList.remove('scale-100');
+            detailsModal.querySelector('div').classList.add('scale-95');
             setTimeout(() => {
-                flowDetailsModal.style.display = 'none'; // Hide the modal
+                detailsModal.style.display = 'none'; // Hide the modal
             }, 300); // Match transition duration
         }
 
-        closeFlowDetailsModalBtn.addEventListener('click', closeFlowDetailsModal);
+        closeDetailsModalBtn.addEventListener('click', closeDetailsModal);
 
-        flowDetailsModal.addEventListener('click', (event) => {
-            if (event.target === flowDetailsModal) {
-                closeFlowDetailsModal();
+        detailsModal.addEventListener('click', (event) => {
+            if (event.target === detailsModal) {
+                closeDetailsModal();
             }
+        });
+
+        // Call render functions on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFlows();
         });
     </script>
 </body>
