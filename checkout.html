@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - Easy AI Lab</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+        }
+        .icon-size {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header (Simple for checkout page) -->
+    <header class="bg-white shadow-sm py-4 px-6 md:px-12 flex items-center justify-between relative z-20">
+        <div class="flex items-center space-x-4">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-gray-900">
+                <img src="https://res.cloudinary.com/dtz36zmtd/image/upload/v1751889248/Logo_EasiAI_rwinsf.jpg" alt="Easy AI Lab Logo" class="h-8 w-auto rounded-md">
+                <span>Easy AI Lab</span>
+            </a>
+        </div>
+        <h1 class="text-xl md:text-2xl font-bold text-gray-900">Thanh toán đơn hàng</h1>
+        <div></div> <!-- Spacer for alignment -->
+    </header>
+
+    <!-- Main Content - Checkout Form -->
+    <main class="py-12 md:py-16 px-6 md:px-12">
+        <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-lg">
+            <div id="checkout-form-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Hoàn tất đơn hàng của bạn</h2>
+
+                <!-- Order Summary -->
+                <div class="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Tóm tắt đơn hàng</h3>
+                    <div id="checkout-items-container" class="border-b border-gray-200 pb-4 mb-4">
+                        <!-- Cart items will be loaded here by JavaScript -->
+                        <p class="text-gray-500 text-center">Giỏ hàng trống. Vui lòng quay lại trang sản phẩm.</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-semibold text-gray-900">Tổng cộng:</span>
+                        <span id="checkout-total" class="text-2xl font-bold text-purple-600">0₫</span>
+                    </div>
+                </div>
+
+                <!-- Contact Information Form -->
+                <form id="checkout-form" class="space-y-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Thông tin liên hệ</h3>
+                    <div>
+                        <label for="customer-name" class="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
+                        <input type="text" id="customer-name" name="customerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                    </div>
+                    <div>
+                        <label for="customer-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="customer-email" name="customerEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                    </div>
+                    <div>
+                        <label for="customer-phone" class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
+                        <input type="tel" id="customer-phone" name="customerPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                    </div>
+
+                    <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Xác nhận đơn hàng</button>
+                </form>
+            </div>
+
+            <!-- Order Confirmation / Payment Instructions Section (Initially Hidden) -->
+            <div id="order-confirmation-section" class="hidden text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500 mx-auto mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Đơn hàng của bạn đã được xác nhận!</h2>
+                <p class="text-lg text-gray-700 mb-4">Cảm ơn bạn đã đặt hàng tại Easy AI Lab. Vui lòng hoàn tất thanh toán để chúng tôi có thể bàn giao sản phẩm.</p>
+
+                <div class="bg-blue-50 p-6 rounded-lg text-left mb-8">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Thông tin thanh toán chuyển khoản</h3>
+                    <p class="text-gray-700 mb-2"><strong>Mã đơn hàng của bạn:</strong> <span id="display-order-id" class="font-bold text-purple-600 text-xl"></span></p>
+                    <p class="text-gray-700 mb-2"><strong>Ngân hàng:</strong> Ngân hàng ABC</p>
+                    <p class="text-gray-700 mb-2"><strong>Số tài khoản:</strong> 123 456 789 000</p>
+                    <p class="text-gray-700 mb-2"><strong>Tên chủ tài khoản:</strong> CÔNG TY TNHH EASY AI LAB</p>
+                    <p class="text-red-600 font-semibold mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        Vui lòng ghi rõ <span class="font-bold text-purple-600">Mã đơn hàng</span> vào nội dung chuyển khoản.
+                    </p>
+                </div>
+
+                <p class="text-gray-600 mb-6">Chúng tôi sẽ gửi file JSON/mã nhúng của sản phẩm qua email của bạn sau khi xác nhận thanh toán.</p>
+                <a href="index.html" class="inline-block bg-purple-600 text-white py-3 px-8 rounded-lg font-bold text-lg hover:bg-purple-700 transition-colors duration-200">Quay về trang chủ</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12 px-6 md:px-12 rounded-t-3xl mt-12">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Company Info -->
+            <div>
+                <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-white mb-4">
+                    <img src="https://res.cloudinary.com/dtz36zmtd/image/upload/v1751889248/Logo_EasiAI_rwinsf.jpg" alt="Easy AI Lab Logo" class="h-8 w-auto rounded-md">
+                    <span>Easy AI Lab</span>
+                </a>
+                <p class="text-sm mb-4">Easy AI Lab là đội ngũ đam mê chuyển đổi số, tận dụng sức mạnh AI để tinh giản quy trình và nâng cao tương tác khách hàng. Chúng tôi xem đây như một phòng nghiên cứu, nơi ý tưởng automation và chatbot được biến thành giải pháp thực tế, giúp doanh nghiệp vận hành thông minh và hiệu quả hơn.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33A29 29 0 0 0 22.54 6.42z"></path><path d="M10 15.25l5-3.25-5-3.25v6.5z"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product Menu -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Sản phẩm</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="allflow.html" class="hover:text-white transition-colors duration-200">Tất cả Flow</a></li>
+                    <li><a href="allchatbot.html" class="hover:text-white transition-colors duration-200">Tất cả Chatbot</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">Email Marketing</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">Sales & CRM</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">Social Media</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-200">E-commerce</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Liên hệ</h4>
+                <ul class="space-y-2 text-sm">
+                    <li>Email: <a href="mailto:contact@easyailab.com" class="hover:text-white transition-colors duration-200">contact@easyailab.com</a></li>
+                    <li>Điện thoại: <a href="tel:+84123456789" class="hover:text-white transition-colors duration-200">+84 123 456 789</a></li>
+                    <li>Địa chỉ: 123A Lê Trung Nghĩa, phường 12, quận Tân Bình, TP.HCM, Việt Nam</li>
+                </ul>
+            </div>
+
+            <!-- Newsletter (Optional, but good for engagement) -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Đăng ký nhận tin</h4>
+                <p class="text-sm mb-4">Nhận thông tin cập nhật về các flow mới và ưu đãi đặc biệt.</p>
+                <form class="flex">
+                    <input type="email" placeholder="Email của bạn" class="flex-grow px-4 py-2 rounded-l-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 transition-colors duration-200">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-500">
+            © 2024 Easy AI Lab. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Function to format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+
+        // Generate a random order ID
+        function generateOrderId() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            const length = 10; // You can adjust the length of the order ID
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkoutItemsContainer = document.getElementById('checkout-items-container');
+            const checkoutTotalSpan = document.getElementById('checkout-total');
+            const checkoutForm = document.getElementById('checkout-form');
+            const checkoutFormSection = document.getElementById('checkout-form-section');
+            const orderConfirmationSection = document.getElementById('order-confirmation-section');
+            const displayOrderId = document.getElementById('display-order-id');
+
+            // Retrieve cart items from localStorage
+            const cartItemsString = localStorage.getItem('checkoutCartItems');
+            let cartItems = [];
+            if (cartItemsString) {
+                cartItems = JSON.parse(cartItemsString);
+            }
+
+            let totalAmount = 0;
+
+            // Render cart items on the checkout page
+            if (cartItems.length === 0) {
+                checkoutItemsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">Giỏ hàng trống. Vui lòng quay lại trang sản phẩm để thêm sản phẩm.</p>';
+                // Optionally disable the form submission if cart is empty
+                checkoutForm.querySelector('button[type="submit"]').disabled = true;
+                checkoutForm.querySelector('button[type="submit"]').classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                checkoutItemsContainer.innerHTML = ''; // Clear default message
+                cartItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+                    itemElement.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-md">
+                            <div>
+                                <p class="font-medium text-gray-900">${item.name}</p>
+                                <p class="text-sm text-gray-600">${formatCurrency(item.price)} x ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <span class="font-semibold text-gray-800">${formatCurrency(item.price * item.quantity)}</span>
+                    `;
+                    checkoutItemsContainer.appendChild(itemElement);
+                    totalAmount += item.price * item.quantity;
+                });
+            }
+            checkoutTotalSpan.textContent = formatCurrency(totalAmount);
+
+            // Handle form submission
+            checkoutForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent default form submission
+
+                const customerName = document.getElementById('customer-name').value;
+                const customerEmail = document.getElementById('customer-email').value;
+                const customerPhone = document.getElementById('customer-phone').value;
+                const orderId = generateOrderId(); // Generate unique order ID
+
+                // Prepare data to send to Make.com webhook
+                const payload = {
+                    orderId: orderId,
+                    customerName: customerName,
+                    customerEmail: customerEmail,
+                    customerPhone: customerPhone,
+                    items: JSON.stringify(cartItems.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        quantity: item.quantity,
+                        price: item.price
+                    }))), // Stringify items array for Google Sheet
+                    totalAmount: totalAmount,
+                    orderDate: new Date().toISOString(), // Current timestamp
+                    paymentStatus: 'Chờ thanh toán'
+                };
+
+                // Replace with your actual Make.com Webhook URL
+                const makeComWebhookUrl = 'YOUR_MAKE_COM_WEBHOOK_URL_HERE'; // <<< THAY THẾ URL NÀY
+
+                try {
+                    const response = await fetch(makeComWebhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+
+                    if (response.ok) {
+                        // Successfully sent to Make.com
+                        console.log('Order data sent to Make.com successfully!');
+
+                        // Display confirmation and payment instructions
+                        displayOrderId.textContent = orderId;
+                        checkoutFormSection.classList.add('hidden');
+                        orderConfirmationSection.classList.remove('hidden');
+
+                        // Clear cart items from localStorage after successful order
+                        localStorage.removeItem('checkoutCartItems');
+                        // Optionally reset cart count in header if we were on the same page
+                        // For this setup, user will likely navigate away, so not strictly necessary here.
+                    } else {
+                        console.error('Failed to send order data to Make.com:', response.status, response.statusText);
+                        // Show error message to user (e.g., using a custom modal or alert div)
+                        alert('Có lỗi xảy ra khi xử lý đơn hàng của bạn. Vui lòng thử lại sau.');
+                    }
+                } catch (error) {
+                    console.error('Error sending order data:', error);
+                    // Show error message to user
+                    alert('Có lỗi xảy ra khi gửi thông tin đơn hàng. Vui lòng kiểm tra kết nối mạng và thử lại.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
