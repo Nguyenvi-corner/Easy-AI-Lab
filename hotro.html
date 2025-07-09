@@ -183,25 +183,6 @@
         </div>
     </section>
 
-    <!-- AI Idea Generator Section -->
-    <section class="py-16 md:py-24 px-6 md:px-12 bg-purple-50">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-purple-800 mb-8">Tạo Ý Tưởng Flow/Chatbot với AI ✨</h2>
-            <p class="text-lg text-gray-700 mb-6">Mô tả vấn đề kinh doanh hoặc nhu cầu của bạn, AI sẽ gợi ý các giải pháp tự động hóa và chatbot độc đáo!</p>
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-                <textarea id="business-problem-input" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 mb-4 h-32 resize-y" placeholder="Ví dụ: Tôi muốn tự động hóa việc chăm sóc khách hàng sau bán hàng cho cửa hàng thương mại điện tử của mình."></textarea>
-                <button id="generate-idea-btn" class="bg-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-purple-700 transition-colors duration-200 flex items-center justify-center mx-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12.9 6.879l-4.242 4.242a2 2 0 0 0 0 2.829l4.242 4.242a2 2 0 0 0 2.829 0l4.242-4.242a2 2 0 0 0 0-2.829l-4.242-4.242a2 2 0 0 0-2.829 0z"></path><path d="M12.9 6.879L18 12l-5.121 5.121"></path><path d="M11.5 12l-5.121 5.121"></path><path d="M11.5 12l5.121-5.121"></path></svg>
-                    Tạo ý tưởng ✨
-                </button>
-                <div id="idea-loading-indicator" class="mt-4 text-purple-600 font-medium hidden">Đang tạo ý tưởng...</div>
-                <div id="generated-ideas-output" class="mt-8 text-left p-6 bg-gray-50 rounded-lg border border-gray-200 hidden">
-                    <!-- Generated ideas will be displayed here -->
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- How It Works -->
     <section class="py-16 md:py-24 px-6 md:px-12 bg-gray-100">
         <div class="max-w-6xl mx-auto">
@@ -371,7 +352,29 @@
         </div>
     </div>
 
+    <!-- Generic Message Modal -->
+    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 w-11/12 max-w-sm shadow-xl transform scale-95 transition-transform duration-300 ease-out">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="message-modal-title" class="text-xl font-bold text-gray-900"></h3>
+                <button id="close-message-modal" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <p id="message-modal-content" class="text-gray-700 mb-6"></p>
+            <button id="message-modal-ok-btn" class="w-full bg-purple-600 text-white py-2 rounded-lg font-bold hover:bg-purple-700 transition-colors duration-200">Đóng</button>
+        </div>
+    </div>
+
     <script>
+        // Function to safely get a valid image URL, falling back to a default if the provided URL is not a valid string.
+        function getValidImageUrl(url, defaultUrl) {
+            if (url && typeof url === 'string' && url.trim() !== '') {
+                return url;
+            }
+            return defaultUrl;
+        }
+
         // JavaScript for mobile hamburger menu
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -430,7 +433,7 @@
                     itemElement.classList.add('flex', 'items-center', 'justify-between', 'py-3', 'border-b', 'border-gray-100');
                     itemElement.innerHTML = `
                         <div class="flex items-center space-x-4">
-                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                            <img src="${getValidImageUrl(item.image, 'https://placehold.co/64x64/cccccc/000000?text=No+Image')}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
                             <div>
                                 <h4 class="font-semibold text-gray-900">${item.name}</h4>
                                 <p class="text-gray-600 text-sm">${formatCurrency(item.price)} x ${item.quantity}</p>
@@ -523,7 +526,21 @@
                 window.location.href = 'checkout.html'; // Redirect to the checkout page
             } else {
                 console.warn('Giỏ hàng trống, không thể tiến hành thanh toán.');
+                showMessage('Giỏ hàng trống', 'Vui lòng thêm sản phẩm vào giỏ hàng trước khi tiến hành thanh toán.');
             }
+        });
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedCartItems = localStorage.getItem('cartItems');
+            if (storedCartItems) {
+                cartItems = JSON.parse(storedCartItems);
+                updateCartCount(); // Update cart count in header
+            }
+
+            renderFeaturedFlows();
+            renderFeaturedChatbots();
+            renderCategories();
         });
 
         // --- Data for Flows and Chatbots ---
@@ -697,7 +714,6 @@
                 rating: 4.9,
                 reviews: 55,
                 tags: ['Email Automation', 'Customer Service', 'Sales Support'],
-                category: 'Email Marketing',
                 features: [
                     'Tự động đọc email từ thư mục được chỉ định.',
                     'Cá nhân hóa nội dung phản hồi.',
@@ -823,7 +839,6 @@
                 rating: 4.8,
                 reviews: 75,
                 tags: ['Mỹ phẩm', 'Làm đẹp', 'Tư vấn sản phẩm', 'Cá nhân hóa'],
-                category: 'Mỹ phẩm & Làm đẹp',
                 features: [
                     'Tư vấn sản phẩm chăm sóc da và trang điểm.',
                     'Gợi ý sản phẩm phù hợp với loại da và nhu cầu.',
@@ -852,7 +867,6 @@
                 rating: 4.7,
                 reviews: 60,
                 tags: ['Phỏng vấn', 'Tuyển dụng', 'Luyện tập', 'Kỹ năng mềm'],
-                category: 'Tuyển dụng & Đào tạo',
                 features: [
                     'Mô phỏng phỏng vấn thực tế.',
                     'Đánh giá câu trả lời và đưa ra phản hồi.',
@@ -880,7 +894,6 @@
                 rating: 4.9,
                 reviews: 90,
                 tags: ['Ẩm thực', 'Nấu ăn', 'Công thức', 'Kế hoạch bữa ăn'],
-                category: 'Ẩm thực & Giải trí',
                 features: [
                     'Gợi ý công thức nấu ăn đa dạng.',
                     'Hướng dẫn chi tiết từng bước.',
@@ -909,7 +922,6 @@
                 rating: 4.6,
                 reviews: 50,
                 tags: ['Email', 'Giao tiếp', 'Văn phòng', 'Hiệu suất'],
-                category: 'Văn phòng & Hiệu suất',
                 features: [
                     'Gợi ý cấu trúc và nội dung email.',
                     'Kiểm tra ngữ pháp và chính tả.',
@@ -929,7 +941,7 @@
             {
                 id: 'chatbot6',
                 name: 'EduBot AI',
-                shortDescription: 'Trợ lý học tập thông minh, giải đáp thắc mắc, cung cấp tài liệu và hỗ trợ ôn thi hiệu quả.',
+                shortDescription: 'Trợ lý học tập thông minh, giải đáp thắcắc, cung cấp tài liệu và hỗ trợ ôn thi hiệu quả.',
                 longDescription: 'EduBot AI là người bạn đồng hành lý tưởng cho học sinh, sinh viên và những người muốn tự học. Chatbot này có thể giải đáp các câu hỏi học thuật, cung cấp tài liệu tham khảo, tóm tắt kiến thức và hỗ trợ ôn tập cho các kỳ thi, giúp quá trình học tập trở nên dễ dàng và hiệu quả hơn.',
                 image: 'https://placehold.co/400x200/10B981/ffffff?text=EduBot+AI',
                 price: 160000,
@@ -937,7 +949,6 @@
                 rating: 4.7,
                 reviews: 80,
                 tags: ['Giáo dục', 'Học tập', 'Ôn thi', 'Kiến thức'],
-                category: 'Giáo dục',
                 features: [
                     'Giải đáp câu hỏi học thuật đa dạng.',
                     'Cung cấp tài liệu và nguồn tham khảo.',
@@ -991,7 +1002,7 @@
                 const itemCard = document.createElement('div');
                 itemCard.classList.add('bg-white', 'rounded-xl', 'shadow-md', 'overflow-hidden', 'transform', 'hover:scale-105', 'transition-transform', 'duration-300');
                 itemCard.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover">
+                    <img src="${getValidImageUrl(item.image, 'https://placehold.co/400x200/cccccc/000000?text=No+Image')}" alt="${item.name}" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center mb-2">
                             <span class="text-yellow-400">★${'★'.repeat(Math.floor(item.rating) - 1)}</span>
@@ -1029,7 +1040,7 @@
                 const itemCard = document.createElement('div');
                 itemCard.classList.add('bg-white', 'rounded-xl', 'shadow-md', 'overflow-hidden', 'transform', 'hover:scale-105', 'transition-transform', 'duration-300');
                 itemCard.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover">
+                    <img src="${getValidImageUrl(item.image, 'https://placehold.co/400x200/cccccc/000000?text=No+Image')}" alt="${item.name}" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center mb-2">
                             <span class="text-yellow-400">★${'★'.repeat(Math.floor(item.rating) - 1)}</span>
@@ -1122,7 +1133,7 @@
 
             if (item) {
                 detailsTitle.textContent = item.name;
-                detailsImage.src = item.image;
+                detailsImage.src = getValidImageUrl(item.image, 'https://placehold.co/400x200/cccccc/000000?text=No+Image');
                 detailsRating.textContent = '★'.repeat(Math.floor(item.rating));
                 if (item.rating % 1 !== 0) { // Add half star if applicable
                     detailsRating.textContent += '½';
@@ -1188,64 +1199,38 @@
             }
         });
 
-        // --- Gemini API Integration Logic ---
-        const businessProblemInput = document.getElementById('business-problem-input');
-        const generateIdeaBtn = document.getElementById('generate-idea-btn');
-        const ideaLoadingIndicator = document.getElementById('idea-loading-indicator');
-        const generatedIdeasOutput = document.getElementById('generated-ideas-output');
+        // --- Generic Message Modal Logic ---
+        const messageModal = document.getElementById('message-modal');
+        const messageModalTitle = document.getElementById('message-modal-title');
+        const messageModalContent = document.getElementById('message-modal-content');
+        const closeMessageModalBtn = document.getElementById('close-message-modal');
+        const messageModalOkBtn = document.getElementById('message-modal-ok-btn');
 
-        generateIdeaBtn.addEventListener('click', async () => {
-            const problem = businessProblemInput.value.trim();
-            if (!problem) {
-                generatedIdeasOutput.innerHTML = '<p class="text-red-500">Vui lòng nhập vấn đề kinh doanh của bạn để tạo ý tưởng.</p>';
-                generatedIdeasOutput.classList.remove('hidden');
-                return;
-            }
+        function showMessage(title, message) {
+            messageModalTitle.textContent = title;
+            messageModalContent.textContent = message;
+            messageModal.style.display = 'flex';
+            setTimeout(() => {
+                messageModal.querySelector('div').classList.remove('scale-95');
+                messageModal.querySelector('div').classList.add('scale-100');
+            }, 10);
+        }
 
-            ideaLoadingIndicator.classList.remove('hidden');
-            generateIdeaBtn.disabled = true;
-            generatedIdeasOutput.classList.add('hidden');
-            generatedIdeasOutput.innerHTML = ''; // Clear previous output
+        function closeMessageModal() {
+            messageModal.querySelector('div').classList.remove('scale-100');
+            messageModal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                messageModal.style.display = 'none';
+            }, 300);
+        }
 
-            try {
-                const prompt = `Hãy đưa ra 3-5 ý tưởng về flow automation hoặc chatbot cho vấn đề kinh doanh sau: "${problem}". Mỗi ý tưởng bao gồm tên, mô tả ngắn gọn và lợi ích chính. Định dạng kết quả là danh sách Markdown.`;
-                let chatHistory = [];
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                const payload = { contents: chatHistory };
-                // Use __api_key if available, otherwise fallback to empty string (Canvas will inject)
-                const apiKey = typeof __api_key !== 'undefined' ? __api_key : "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    // Use the global 'marked' object for parsing
-                    generatedIdeasOutput.innerHTML = `<h3 class="text-xl font-semibold text-gray-900 mb-4">Ý tưởng được tạo bởi AI:</h3>${marked.parse(text)}`;
-                    generatedIdeasOutput.classList.remove('hidden');
-                } else {
-                    generatedIdeasOutput.innerHTML = '<p class="text-red-500">Không thể tạo ý tưởng. Vui lòng thử lại.</p>';
-                    generatedIdeasOutput.classList.remove('hidden');
-                }
-            } catch (error) {
-                console.error('Lỗi khi gọi API Gemini:', error);
-                generatedIdeasOutput.innerHTML = '<p class="text-red-500">Đã xảy ra lỗi khi tạo ý tưởng. Vui lòng kiểm tra kết nối mạng hoặc thử lại sau.</p>';
-                generatedIdeasOutput.classList.remove('hidden');
-            } finally {
-                ideaLoadingIndicator.classList.add('hidden');
-                generateIdeaBtn.disabled = false;
+        closeMessageModalBtn.addEventListener('click', closeMessageModal);
+        messageModalOkBtn.addEventListener('click', closeMessageModal);
+        messageModal.addEventListener('click', (event) => {
+            if (event.target === messageModal) {
+                closeMessageModal();
             }
         });
     </script>
-    <!-- Include Marked.js for Markdown parsing -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
 </html>
